@@ -171,6 +171,66 @@
   .theme-text-muted {
     @apply text-(--theme-text-muted-color);
   }
+
+  .visitor-alert-card {
+    position: relative;
+    border-radius: 1.25rem;
+    box-shadow:
+      0 18px 50px rgb(0 0 0 / 0.16),
+      inset 0 1px 0 rgb(255 255 255 / 0.28);
+  }
+
+  .visitor-alert-close {
+    display: inline-flex;
+    height: 1.75rem;
+    width: 1.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    color: var(--theme-text-muted-color);
+    background: rgb(from var(--accent-3) r g b / 0.35);
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .visitor-alert-close:hover {
+    color: var(--foreground);
+    background: rgb(from var(--accent-5) r g b / 0.55);
+    transform: scale(1.04);
+  }
+
+  .visitor-alert-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    border: 1px solid rgb(from var(--accent-8) r g b / 0.35);
+    background: rgb(from var(--accent-3) r g b / 0.38);
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: var(--foreground);
+  }
+
+  .visitor-alert-badge-safe {
+    border-color: rgb(34 197 94 / 0.32);
+    background: rgb(34 197 94 / 0.12);
+    color: rgb(22 163 74);
+  }
+
+  .visitor-alert-badge-warn {
+    border-color: rgb(245 158 11 / 0.36);
+    background: rgb(245 158 11 / 0.14);
+    color: rgb(217 119 6);
+  }
+
+  .visitor-alert-badge-danger {
+    border-color: rgb(239 68 68 / 0.36);
+    background: rgb(239 68 68 / 0.14);
+    color: rgb(220 38 38);
+  }
 }
 
 .striped-bg-red-translucent-diagonal {
@@ -185,6 +245,129 @@
     transparent 100%
   );
   background-size: 60px 60px;
+}
+
+/* 访客提示卡动画 */
+.visitor-alert-idle {
+  opacity: 0;
+  transform: translateY(14px) scale(0.98);
+}
+
+.visitor-alert-enter {
+  animation: visitorAlertIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.visitor-alert-exit {
+  animation: visitorAlertOut 0.24s ease-in forwards;
+}
+
+.visitor-alert-row {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: visitorAlertRowIn 0.42s ease-out forwards;
+}
+
+.visitor-alert-row-1 {
+  animation-delay: 0.08s;
+}
+
+.visitor-alert-row-2 {
+  animation-delay: 0.14s;
+}
+
+.visitor-alert-row-3 {
+  animation-delay: 0.2s;
+}
+
+.visitor-alert-row-4 {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: visitorAlertRowIn 0.42s ease-out 0.26s forwards;
+}
+
+.visitor-alert-shimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.visitor-alert-shimmer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgb(255 255 255 / 0.22),
+    transparent
+  );
+  transform: skewX(-18deg);
+  animation: visitorAlertShimmer 2.8s ease-in-out 0.25s 1;
+}
+
+@keyframes visitorAlertIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes visitorAlertOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+
+@keyframes visitorAlertRowIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes visitorAlertShimmer {
+  from {
+    left: -45%;
+  }
+  to {
+    left: 120%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visitor-alert-enter,
+  .visitor-alert-exit,
+  .visitor-alert-row,
+  .visitor-alert-row-4,
+  .visitor-alert-shimmer::before {
+    animation: none;
+  }
+
+  .visitor-alert-idle,
+  .visitor-alert-enter,
+  .visitor-alert-exit,
+  .visitor-alert-row,
+  .visitor-alert-row-4 {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* 动画效果 */
