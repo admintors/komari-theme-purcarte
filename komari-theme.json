@@ -329,6 +329,24 @@
                 "help": "启用后列表视图中将会显示进度条来表示使用率"
             },
             {
+                "name": "访客提示卡",
+                "type": "title"
+            },
+            {
+                "key": "enableVisitorAlert",
+                "name": "启用访客提示卡",
+                "type": "switch",
+                "default": true,
+                "help": "启用后访客进入首页时会显示一个 PurCarte 风格的磨砂玻璃提示卡，展示 IP、位置、运营商和代理检测结果。数据来自第三方公共 IP 查询服务。"
+            },
+            {
+                "key": "visitorAlertAutoDismissMs",
+                "name": "访客提示卡自动关闭时间（毫秒）",
+                "type": "number",
+                "default": 8000,
+                "help": "设置访客提示卡自动关闭时间，单位为毫秒。建议 6000-10000，设置为 8000 表示 8 秒后自动关闭。"
+            },
+            {
                 "name": "Instance 设置",
                 "type": "title"
             },
