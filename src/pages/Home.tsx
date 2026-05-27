@@ -18,6 +18,7 @@ import {
 import { useIsMobile } from "@/hooks/useMobile";
 import { useLocale } from "@/config/hooks";
 import { cn } from "@/utils";
+import { VisitorAlert } from "@/components/overlays/VisitorAlert";
 
 interface HomePageProps {
   searchTerm: string;
@@ -51,6 +52,8 @@ const HomePage: React.FC<HomePageProps> = ({
     selectTrafficProgressStyle,
     isShowStatsInHeader,
     mergeGroupsWithStats,
+    enableVisitorAlert,
+    visitorAlertAutoDismissMs,
   } = useAppConfig();
   const { t } = useLocale();
 
@@ -90,6 +93,11 @@ const HomePage: React.FC<HomePageProps> = ({
 
   return (
     <div className="fade-in my-4">
+      <VisitorAlert
+        enabled={enableVisitorAlert}
+        autoDismissMs={visitorAlertAutoDismissMs}
+      />
+
       {enableStatsBar && (!isShowStatsInHeader || isMobile) && (
         <StatsBar
           displayOptions={statusCardsVisibility}
