@@ -44,6 +44,8 @@ export interface ConfigOptions {
   isShowValueUnderProgressBar: boolean; // 是否在流量进度条下方显示数值
   selectTrafficProgressStyle: "circular" | "linear"; // 流量进度条样式
   enableListItemProgressBar: boolean; // 是否启用列表视图进度条
+  enableVisitorAlert: boolean; // 是否启用访客提示卡
+  visitorAlertAutoDismissMs: number; // 访客提示卡自动关闭时间（毫秒）
   customTexts: string; // 自定义UI文本
 }
 
@@ -95,6 +97,8 @@ export const DEFAULT_CONFIG: ConfigOptions = {
   isShowValueUnderProgressBar: false,
   selectTrafficProgressStyle: "linear",
   enableListItemProgressBar: true,
+  enableVisitorAlert: true,
+  visitorAlertAutoDismissMs: 8000,
   customTexts: "",
 };
 // 定义颜色类型
