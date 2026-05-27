@@ -1,0 +1,48 @@
+name: Build PurCarte Theme Zip
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build theme
+        run: npm run build
+
+      - name: Prepare package
+        run: |
+          mkdir -p release/PurCarte
+          cp komari-theme.json release/PurCarte/
+          cp preview.png release/PurCarte/ || true
+          cp -r dist release/PurCarte/
+
+      - name: Create zip
+        run: |
+          cd release/PurCarte
+          zip -r ../PurCarte-theme.zip .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PurCarte-theme
+          path: release/PurCarte-theme.zip
